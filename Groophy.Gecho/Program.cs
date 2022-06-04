@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -17,12 +17,13 @@ namespace Groophy.Gecho
                 }
                 else
                 {
+                    ConsoleColor consoleColor = Console.ForegroundColor;
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     for (int i = 0; i < args.Length; i++) sb.Append(args[i] + " ");
                     sb.Remove(sb.Length - 1, 1);
                     string[] lns = sb.ToString().Split(new[] { "<nl>" }, StringSplitOptions.None);
-                    for (int i = 0;i < lns.Length;i++) Coologs.Print(lns[i]);
-                    Console.ResetColor();
+                    for (int i = 0; i < lns.Length; i++) Coologs.Print(lns[i]);
+                    Console.ForegroundColor = consoleColor;
                 }
             }
             else
@@ -35,15 +36,11 @@ namespace Groophy.Gecho
         {
             Console.WriteLine(@"
 Gecho helps you write colorful texts in one line with low ms guarantee.
-
 Syntax: 
-	call gecho"+" \"<COLORS> TEXT\""+@"
-
-	call gecho "+"\"This is a <r>Red<gn>Green<gray>Grey<Bk>Black<B>Blue\""+@"
-
+	call gecho" + " \"<COLORS> TEXT\"" + @"
+	call gecho " + "\"This is a <r>Red<gn>Green<gray>Grey<Bk>Black<B>Blue\"" + @"
 Note:
 	Because of cmd's rules, you must enclose the string in double quotes for the command to work properly.
-
 Where:
         <Black> = Black         <Gray> = Gray(g)
         <Blue> = Blue(b)        <DarkBlue> = Dark Blue(db)
@@ -54,7 +51,6 @@ Where:
         <Yellow> = Yellow(y)    <DarkRed> = Dark Red(dr)
         <Magenta> = Magenta(m)  <DarkYellow> = Dark Yellow(dy)
         </> = Reset Color       <nl> = NewLine without reset color
-
 AUTHOR:
 	Gecho has been written by Groophy Lifefor and helped by MBausson.
 	Discord: Groophy#1966
@@ -99,7 +95,7 @@ AUTHOR:
                         //  A </> closure tag resets color
                         if (tag[0] == '/')
                         {
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         //  Sets desired color
                         else
